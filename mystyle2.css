@@ -1,0 +1,28 @@
+.column-middle{
+    background-color: darkgray;
+}
+.selectedLink button, button:hover{
+    background-color:pink;
+}
+.column-middle-logo{
+    background-color: firebrick;
+}
+.column-middle-categories{
+    background-color: pink;
+}
+.column-middle-weather{
+    background-color: hotpink;
+}
+.table-div{
+    background-color:red;
+}
+
+.category{
+    background-color:lightseagreen;
+}
+.site *{
+    background-color:darkgrey;
+}
+.subsite *{
+    background-color:lightblue;
+}

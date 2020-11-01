@@ -9,11 +9,11 @@ var subsite=[];
 
 var contents="";
 
-var searchEngine=[
-  {name:'google',adress:'google.com',search:'google.com/search?q='},
-  {name:'duckduckgo',adress:'duckduckgo.com',search:"duckduckgo.com/?q=search",lucky:"duckduckgo.com/?q=%5C"}
-];
-
+var searchEngine={google:'google.com/search?q=',duckduckgo:'duckduckgo.com/?q=search',luckyDuckduckgo:'duckduckgo.com/?q=\\'};
+  //,
+  //{name:'google',adress:'google.com',search:'google.com/search?q='},
+  //{name:'duckduckgo',adress:'duckduckgo.com',search:"duckduckgo.com/?q=search",lucky:"duckduckgo.com/?q=%5C"}
+//];
 
 document.addEventListener('DOMContentLoaded', function() {
   document.getElementById('file-input').addEventListener('change', readSingleFile, false);
@@ -24,8 +24,8 @@ document.addEventListener('DOMContentLoaded', function() {
   
   contents=localStorage.getItem("contents");
   handleFile(contents);
-  displayContents(contents);
-
+  //displayContents(contents);
+  document.getElementById("searchQuerry").value="";
   document.getElementById("searchQuerry").focus();
   createTable();
 }, false);
@@ -39,10 +39,12 @@ function readSingleFile(e) {
   reader.onload = function(e) {
     var contents = e.target.result;
     localStorage.setItem("contents",contents);
-    alert(localStorage.getItem("contents"));
 
+    //alert(localStorage.getItem("contents"));
   };
   reader.readAsText(file);
+
+  window.location.reload(true);
 }
 
 function displayContents(file) {
@@ -302,6 +304,7 @@ function createTable(){
 
     var th=document.createElement("th");
     th.innerHTML=category[u].name;
+    th.classList.add("category");
     tr.appendChild(th);
     table.appendChild(tr);
 
@@ -323,6 +326,7 @@ function createTable(){
         var td=document.createElement("td");
         td.id=u+"x"+index;
         td.className="linkButton";
+        td.classList.add("site");
         var btn=document.createElement("button");
         btn.innerHTML=site[i].name;
         td.appendChild(btn);
@@ -339,7 +343,9 @@ function createTable(){
             
             var td=document.createElement("td");
             td.id=u+"x"+index;
-            td.className="linkButton";
+            td.classList.add("linkButton");
+            td.classList.add("subsite");
+            
             var btn=document.createElement("button");
             btn.innerHTML=subsite[j].name;
             td.appendChild(btn);
@@ -358,7 +364,7 @@ function createTable(){
 
 document.addEventListener('click', function(e) {
   e = e || window.event;
-  if(e.target.parentElement.className=="linkButton"){
+  if(e.target.parentElement.className.includes("linkButton")){
     var dimensions=e.target.parentElement.id;
     //alert(dimensions);
     dimensions=dimensions.split("x");
@@ -368,7 +374,6 @@ document.addEventListener('click', function(e) {
     selectLink();
     search();
     //updateDevOutput();
-
   }
 }, false);
 
@@ -402,8 +407,8 @@ function updateDevOutput(){
     }
   }
 
-  var temp="x:"+x+" y:"+y+" xMax:"+xMax+" yMax"+yMax+"<br>";
-  document.getElementById('dev').innerHTML=temp+" "+Menu;
+  //var temp="x:"+x+" y:"+y+" xMax:"+xMax+" yMax"+yMax+"<br>";
+  //document.getElementById('dev').innerHTML=temp+" "+Menu;
   //alert(temp);
 }
 
@@ -421,6 +426,8 @@ function countLinksOfCategory(x){
   return temp;
 }
 
+var shiftPressed=false;
+
 
 document.addEventListener('keydown', function(event) {
   //on <enter> or <shift> launch searching querry. It always works no matter what Menu varaible state
@@ -428,12 +435,18 @@ document.addEventListener('keydown', function(event) {
     //Menu="links"; document.activeElement.blur();
 
   if(event.key=="Enter"){
-    search();
+    search(shiftPressed);
+  }
+
+  if(event.key=="Shift"){
+    shiftPressed=true;
+  }else {
+    shiftPressed=false;
   }
   
   if(Menu=="search"){
     if(document.activeElement.value==""){
-      if(event.key=="Tab" || event.key==" " || event.key=="ArrowDown" || event.key=="Backspace"){
+      if(event.key=="Tab" || event.key==" " || event.key=="ArrowDown" || event.key == "ArrowLeft" || event.key == "ArrowRight" || event.key=="Backspace"){
         Menu="links";
         document.activeElement.blur();
       }
@@ -470,6 +483,10 @@ document.addEventListener('keydown', function(event) {
     else if(event.key == "ArrowDown") {
       //alert('Left was pressed');
       if(y<yMax-1)y++;
+    }else{
+      Menu="links";
+      document.getElementById("searchQuerry").focus();
+      return true;
     }
     updateDevOutput()
     selectLink();
@@ -494,7 +511,7 @@ function deSelectLink(){
   selectedLink.classList.remove("selectedLink");
 }
 
-function search(){
+function search(lucky){
   var querry=document.getElementById("searchQuerry").value;
   var name=document.getElementById(x+"x"+y).firstChild.innerHTML;
   var site=getSite(name) || getSubsite(name);
@@ -504,7 +521,12 @@ function search(){
       alert("What You want me to do?!");
     }else{
       //alert("Searching '"+querry+"' using default search engine "+searchEngine[0].search+" "+"http://"+searchEngine[0].search+encodeURI(querry));
-      window.location.href ="http://"+encodeURI(searchEngine[0].search+querry);
+      if(lucky){
+        window.location.href ="http://"+encodeURI(searchEngine.luckyDuckduckgo+querry);
+      }else{
+        window.location.href ="http://"+encodeURI(searchEngine.google+querry);
+      }
+
     }
   }else if(Menu=="links"){
     if(querry==""){
@@ -513,20 +535,31 @@ function search(){
     }else{
       if(site.search===undefined){
         //alert("Searching '"+querry+"' using default search engine and 'site:' option");
-        window.location.href ="http://"+encodeURI(searchEngine[0].search+'site:'+site.adress+" "+querry);
+        if(lucky){
+          //alert("Lucky button search!");
+          window.location.href ="http://"+encodeURI(searchEngine.luckyDuckduckgo+'site:'+site.adress+" "+querry);
+        }else {
+          window.location.href ="http://"+encodeURI(searchEngine.google+'site:'+site.adress+" "+querry);
+        }
+
       }else{
         //var tempSearch=site.search+querry;
         //alert("Searching '"+querry+"' using site search by link "+tempSearch);
-        var tempSearch=site.search;
-        if(site.search.includes("QUERRY")){
-          tempSearch=tempSearch.replace('QUERRY',querry);
-          //alert("Going to Querred "+tempSearch)
+        if(lucky){
+          //alert("Searching "+site.adress+" "+querry+" on feeling ducky!");
+          window.location.href ="http://"+encodeURI(searchEngine.luckyDuckduckgo+'site:'+site.adress+" "+querry);
         }else{
-          tempSearch=site.search+querry;
-          //alert("Going to "+site.search+querry);
+          var tempSearch=site.search;
+          if(site.search.includes("QUERRY")){
+            tempSearch=tempSearch.replace('QUERRY',querry);
+            //alert("Going to Querred "+tempSearch)
+          }else{
+            tempSearch=site.search+querry;
+            //alert("Going to "+site.search+querry);
+          }
+          //alert("Going to "+tempSearch);
+          window.location.href ="http://"+encodeURI(tempSearch);
         }
-        //alert("Going to "+tempSearch);
-        window.location.href ="http://"+encodeURI(tempSearch);
       }
     }
   }else{

@@ -1,0 +1,95 @@
+.column-middle{
+    background-color: rgb(125, 189, 164);
+}
+.selectedLink button, button:hover{
+    background-color:hotpink;
+}
+.column-middle-logo{
+    padding:30px;
+}
+
+.column-middle-logo img{
+    width: 60%;    
+    image-rendering: crisp-edges;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.575), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+
+.column-middle-weather{
+    background-color: hotpink;
+}
+
+.table-div{
+    margin:10px;
+}
+
+button {
+    border:none;
+    width:100%;
+
+    padding:0;
+}
+
+
+.table-div{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    background-color:rgb(253, 161, 176);
+}
+
+td, tr, button{
+    background-color:rgb(253, 161, 176);
+    border-color: purple;
+}
+
+th{
+    background-color:rgba(0, 0, 0, 0.233);
+    padding: 4px;
+}
+
+th{
+    color:rgba(0, 0, 0, 0.767);
+}
+
+.selectedLink button, button:hover{
+    background-color:rgba(255, 255, 255, 0.308);
+}
+
+.selectedLink.subsite button, .subsite:hover button:hover{
+    background-color:rgb(255, 228, 228);
+}
+
+.column-middle-fields{
+    margin: auto;
+    width: 90%;
+    
+    border-color:rgb(206, 125, 138);
+    padding:10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    margin-bottom: 20px;
+
+    border-top-style: solid;
+    border-top-width: 10px;
+    background-color:rgb(253, 161, 176);
+    
+}
+
+.column-middle-fields input{
+    background-color:rgba(255, 255, 255, 0.377);
+    height:20px;
+}
+
+.column-middle-fields input[type=button]{
+    width:15%;
+    
+}
+.column-middle-fields input[type=text]{
+    width:68%;
+}
+
+#dev {
+    display: none;
+}
+
+.column-middle-dev:hover >#dev {
+    display: block;
+}
