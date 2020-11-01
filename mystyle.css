@@ -1,0 +1,50 @@
+.column-middle{
+    background-color: darkgray;
+    width: 80%;
+    height:80%;
+    display: block;
+    float:right;
+    align-items: center;
+}
+.column-side{
+    width:10%;
+    height:50%;
+    float:right;
+    background-color:darkseagreen;
+}
+.column-middle-logo{
+    background-color: firebrick;
+}
+.column-middle-fields .button{
+    border: none;
+}
+.column-middle-categories{
+    background-color: pink;
+    
+}
+.column-middle-weather{
+    background-color: hotpink;
+}
+
+.insert-links-here{
+    
+}
+
+.table-div{
+    width:25%;
+    display:inline-flex;
+    background-color:red;
+}
+table{
+    width:100%;
+}
+button{
+    border:none;
+    padding:10px 15px;
+    width:100%;
+}
+
+
+.selectedLink button, button:hover{
+    background-color:blue;
+}
