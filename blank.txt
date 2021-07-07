@@ -1,0 +1,74 @@
+# This is configuration file for startpage at adress anteczko.github.io/startpage/
+# Github repo adress is github.com/anteczko/startpage/
+# 
+
+# How it works?
+# as You can see hash character '#' at the start of the line tells parser that this line is just a comment
+# There are three typs of hierarchy in this file, marked by indentations. The more 'indented' link/adress is, the lower is in hierarchy
+
+# Websites hierarchy
+# Category[no indentation] - it is showed on website as separate 'table', in which You will insert website list
+#     Website[4 spaces or 1 tabualtor] - adress to cetain website, generally it should point to 'main' site if You want it's sub-sites to work
+#        Subsite[8 spaces or 2 tabualtors] - it's subsite for it's parent (main)website. Full adress can be provided, but it's possible to skip adress to 'main site' it sub-site adress starts with '/' character
+
+# Argument's are interpreted differently based on it's numbers. You can define same category/website/sub-site using only one, or more arguments. Arguments are separated by comma characters ','  
+
+#How you can add a category
+#category_name,icon_adress,color
+#category_name,color
+#category_name
+
+#color and icon_adress not yet supported
+
+#   How you can add a site
+#   site_name,site_adress,search_link,icon_adress
+#   site_name,site_adress,search_link
+#   site_name,site_adress
+#   site_adress
+
+# search link sometimes have searched word' inside of search link, in that
+# case your searched words will be put into place of word 'QUERRY' in search
+# link, or added at the very end of it
+# protip go into site, search 'QUERRY' using it's internal search engine and
+# copy resulting link right into this file
+
+# Example
+#   reddit,reddit.com,/search?q=
+#   reddit,reddit.com
+#   reddit.com
+
+#       How you can add a subsite
+#       subsite_name,site_adress,search_link,icon_adress
+#       subsite_name,site_adress,search_link
+#       subsite_name,site_adress
+#       subsite_adress
+
+# if site/subsite adress starts with '/' it means that it's adress will be added atop of parent's adress category
+#  reddit.com
+#       unixporn,/r/unixporn/,/search?q=QUERRY&restrict_sr=on
+#       unixporn,reddit.com/r/unixporn
+#       unixporn,/r/unixporn
+#       /r/unixporn
+
+############################################################################################
+#         How it whould really look like
+############################################################################################
+
+search engines
+    google images,google.pl/imghp,google.com/search?q=QUERRY&tbm=isch
+    stackoverflow,stackoverflow.com,/search?q=
+    arch-wiki,wiki.archlinux.org,/index.php?search=QUERRY&title=Special%3ASearch&go=Go
+    duckduckgo,duckduckgo.com,/?q=
+
+fun
+    youtube,youtube.com/feed/subscriptions,www.youtube.com/results?search_query=
+    reddit,reddit.com,/search?q=QUERRY&include_over_18=on&sort=relevance&t=all
+        /r/unixporn,reddit.com/r/unixporn+UsabilityPorn+unixart
+        /r/memes,reddit.com/r/dankmemes+memes
+    /pol/,4chan.org/pol/catalog,4chan.org/pol/
+    /g/,4chan.org/g/catalog,4chan.org/g/
+
+dev
+    localhost,127.0.0.1
+        8080,127.0.0.1:8080
+    router,192.168.1.1
