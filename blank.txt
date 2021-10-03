@@ -65,8 +65,6 @@ fun
     reddit,reddit.com,/search?q=QUERRY&include_over_18=on&sort=relevance&t=all
         /r/unixporn,reddit.com/r/unixporn+UsabilityPorn+unixart
         /r/memes,reddit.com/r/dankmemes+memes
-    /pol/,4chan.org/pol/catalog,4chan.org/pol/
-    /g/,4chan.org/g/catalog,4chan.org/g/
 
 dev
     localhost,127.0.0.1
